@@ -1,3 +1,4 @@
+import Item.Book;
 import Person.Member;
 
 import java.util.Scanner;
@@ -49,47 +50,80 @@ public class LMS {
                 """);
                 librarian_page();
             }
-            case 2 -> member_page();
+            case 2 -> member_login_page();
             case 3-> exit_page();
             default -> login_page();
         }
         return;
     }
 
+    private static void member_page(Member person){
+        System.out.print(
+                """
+                        - - - - - - - - - - - - - - - - - - - - - - - -\s
+                        Choose a suitable option from the menu below.
+                        
+                        1. List all Books
+                        2. List my Books
+                        3. Issue a Book
+                        4. Return Book
+                        5. Pay Fine
+                        6. Back
+                                               
+                        Your choice : \s""");
+        Scanner Member_interface = new Scanner(System.in);
+        int choice = Member_interface.nextInt();
+        System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - -\s");
+        switch (choice) {
+            case 1 -> Book.show_all();
+            case 2 -> //List my books
+            case 3 -> //Issue a book
+            case 4 -> //Return a book
+            case 5 -> person.pay_fine();
+            case 6 -> {
+                login_page();
+                return;
+            }
+        }
+        member_page();
+        return;
+    }
+
     public static void librarian_page(){
         System.out.print(
                 """
-               
-                Choose a suitable option from the menu below.
-                
-                1. Register new Member
-                2. View all members with pending dues
-                3. De-register a Member
-                4. Find a Member
-                5. Add a Book
-                6. View all Books
-                7. Remove a Book
-                8. Find a Book
-                9. Back
+                        - - - - - - - - - - - - - - - - - - - - - - - -\s
+                        Choose a suitable option from the menu below.
                                         
-                Your choice : \s""");
+                        1. Register new Member
+                        2. View all members with pending dues
+                        3. De-register a Member
+                        4. Find a Member
+                        5. Add a Book
+                        6. View all Books
+                        7. Remove a Book
+                        8. Find a Book
+                        9. Back
+                                                
+                        Your choice : \s""");
         Scanner Librarian_interface = new Scanner(System.in);
         int choice = Librarian_interface.nextInt();
+        System.out.println(" - - - - - - - - - - - - - - - - - - - - - - - -\s");
         switch (choice) {
             case 1 -> Member.register();
-            case 2 ->
-            case 3 ->
-            case 4 ->
-            case 5 ->
-            case 6 ->
-            case 7 ->
-            case 8 ->
+            case 2 -> Member.show_all();
+            case 3 -> Member.remove();
+            case 4 -> Member.search();
+            case 5 -> Book.add();
+            case 6 -> Book.show_all();
+            case 7 -> Book.remove();
+            case 8 -> Book.search();
             case 9 -> {
                 login_page();
                 return;
             }
-            librarian_page();
         }
+        librarian_page();
         return;
     }
 
